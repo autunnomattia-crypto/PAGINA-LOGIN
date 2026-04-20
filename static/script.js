@@ -1,10 +1,20 @@
 async function controllacredenziali() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    if (!username || !password ) 
-        return alert("Scrivi un nome! e password");
+     if (!username || !password ) 
+         return alert("Scrivi un nome! e password");
     const res = await fetch(`/login?username=${username}&password=${password}`);
     const dati = await res.json();
-    document.getElementById('Risultato').innerText = dati.messaggio;
-}
-document.getElementById('btn-registrati').addEventListener('click',controllacredenziali)
+     document.getElementById('Risultato').innerText = dati.messaggio;
+     if (dati.messaggio === 1) {
+        document.getElementById('Risultato').innerText = "Benvenuto nel sito"
+        document.getElementById('username').style.display = 'none';
+        document.getElementById('password').style.display = 'none';
+        document.getElementById('btn-registrati').style.display = 'none';
+     } else {
+        document.getElementById('Risultato').innerText = "hai sbagliato qualcosa"
+        document.getElementById('username').value = "";
+        document.getElementById('password').value = "";
+     }
+    }
+    document.getElementById('btn-registrati').addEventListener('click',controllacredenziali)
