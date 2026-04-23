@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Form
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -18,3 +18,10 @@ def controlla(username: str,password : str):
     else:
         risposta = {"messaggio": 0}
     return(risposta)
+
+@app.post("/login2")
+def Controlla(username: str = Form(...), password: str = Form(...)):
+    if username.lower() == "admin" and password == "xxx123##":
+        return {"messaggio": 1}
+    else:
+        return {"messaggio": 0}

@@ -3,6 +3,8 @@ async function controllacredenziali() {
     const password = document.getElementById('password').value;
      if (!username || !password ) 
          return alert("Scrivi un nome! e password");
+
+
     const res = await fetch(`/login?username=${username}&password=${password}`);
     const dati = await res.json();
      document.getElementById('Risultato').innerText = dati.messaggio;
@@ -18,3 +20,32 @@ async function controllacredenziali() {
      }
     }
     document.getElementById('btn-registrati').addEventListener('click',controllacredenziali)
+
+    async function loggati() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (!username || !password)
+        return alert("Scrivi lo username e password");
+
+    const res = await fetch("/login2", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `username=${username}&password=${password}`
+    });
+
+    const json = await res.json();
+
+    if (json.messaggio == 1){
+        document.getElementById("risultato").innerText = "Accesso effettuato";
+    }
+    else {
+        document.getElementById("risultato").innerText = "Accesso negato";
+    }
+}
+
+document.getElementById('btn-registrati2').addEventListener('click', loggati);
+
