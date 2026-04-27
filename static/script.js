@@ -40,12 +40,40 @@ async function controllacredenziali() {
     const json = await res.json();
 
     if (json.messaggio == 1){
-        document.getElementById("risultato").innerText = "Accesso effettuato";
+        document.getElementById("Risultato").innerText = "Accesso effettuato";
     }
     else {
-        document.getElementById("risultato").innerText = "Accesso negato";
+        document.getElementById("Risultato").innerText = "Accesso negato";
     }
 }
 
 document.getElementById('btn-registrati2').addEventListener('click', loggati);
+
+ async function loggatiPandas() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (!username || !password)
+        return alert("Scrivi lo username e password");
+
+    const res = await fetch("/loginPandas", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `username=${username}&password=${password}`
+    });
+
+    const json = await res.json();
+
+    if (json.messaggio == 1){
+        document.getElementById("Risultato").innerText = "Accesso effettuato";
+    }
+    else {
+        document.getElementById("Risultato").innerText = "Accesso negato";
+    }
+}
+
+document.getElementById('btn-Pandas').addEventListener('click', loggatiPandas);
 
